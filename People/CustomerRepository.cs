@@ -68,13 +68,14 @@ namespace People
 
 				var lines = _lineFile.ReadAllLines();
 
+				if (_hasHeader)
+				{
+					//Skip first line...
+					lines.RemoveAt(0);
+				}
+
 				foreach (var line in lines)
 				{
-					if (_hasHeader)
-					{
-						//Skip first line...
-						continue;
-					}
 					var entity = new T();
 					var loaded = entity.Load(line, _separator);
 					if (loaded)
